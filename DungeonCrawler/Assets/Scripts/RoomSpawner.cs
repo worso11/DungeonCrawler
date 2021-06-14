@@ -28,31 +28,10 @@ public class RoomSpawner : MonoBehaviour
     {
         if (spawned == false)
         {
-            /*if (dir == 1)
-            {
-                rand = Random.Range(0, rooms.L.Length);
-                room = Instantiate(rooms.L[rand], transform.position, rooms.L[rand].transform.rotation);
-            }
-            else if (dir == 2)
-            {
-                rand = Random.Range(0, rooms.T.Length);
-                room = Instantiate(rooms.T[rand], transform.position, rooms.T[rand].transform.rotation);
-            }
-            else if (dir == 3)
-            {
-                rand = Random.Range(0, rooms.R.Length);
-                room = Instantiate(rooms.R[rand], transform.position, rooms.R[rand].transform.rotation);
-            }
-            else if (dir == 4)
-            {
-                rand = Random.Range(0, rooms.B.Length);
-                room = Instantiate(rooms.B[rand], transform.position, rooms.B[rand].transform.rotation);
-            }*/
             if (dir != 0)
             {
                 rand = Random.Range(0, allRooms[dir-1].Length);
                 room = Instantiate(allRooms[dir-1][rand], transform.position, allRooms[dir-1][rand].transform.rotation);
-                //Debug.Log( room.name.Length + ":" + transform.position);
             }
             spawned = true;
         }

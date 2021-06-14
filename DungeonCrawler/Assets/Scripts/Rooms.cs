@@ -11,7 +11,8 @@ public class Rooms : MonoBehaviour
     public GameObject[] R;
     public GameObject[] T;
     public GameObject[] B;
-    public GameObject enemy;
+    public GameObject[] enemies;
+    public GameObject[] weapons;
     public GameObject portal;
     public GameObject levelNum;
     public Dictionary<Tuple<float,float>, Tuple<GameObject,int>> rooms;
@@ -29,12 +30,31 @@ public class Rooms : MonoBehaviour
         Invoke(nameof(PrepareRooms), 2f);
     }
 
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.MoveGameObjectToScene(player, SceneManager.GetActiveScene());
+            SceneManager.MoveGameObjectToScene(camera, SceneManager.GetActiveScene());
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            Instantiate(weapons[0], new Vector3(-4.5f, 1.5f, 0), Quaternion.identity);
+            Instantiate(weapons[1], new Vector3(-3f, 1.5f, 0), Quaternion.identity);
+            Instantiate(weapons[2], new Vector3(-1.5f, 1.5f, 0), Quaternion.identity);
+        }
+        
+    }
+
     public void Reset()
     {
         Instantiate(levelNum, new Vector3(0.5f, -0.5f, -10f), Quaternion.identity);
         rooms = new Dictionary<Tuple<float, float>, Tuple<GameObject,int>>();
         player.transform.position = new Vector3(0.5f, -0.5f, 0f);
         camera.transform.position = new Vector3(0.5f, -0.5f, -10f);
+        player.GetComponent<Movement>().ResetWeapon();
         SceneManager.LoadScene("Game");
         Invoke(nameof(PrepareRooms), 2f);
     }
@@ -114,6 +134,11 @@ public class Rooms : MonoBehaviour
             rooms[new Tuple<float, float>(posX, posY)] = new Tuple<GameObject, int>(room, 3);
         }
 
+        if (type == 1)
+        {
+            SpawnWeapon(posX, posY, x, y);
+        }
+        
         if (type == 2)
         {
             Instantiate(portal, new Vector3(posX, posY, 0), Quaternion.identity);
@@ -171,11 +196,16 @@ public class Rooms : MonoBehaviour
         {
             if (Random.value > Random.Range(1, 4)*0.25f)
             {
-                Instantiate(enemy, new Vector3(startX + (i-1)*moveX, startY + (i-1)*moveY, 0), new Quaternion());
+                int e = Random.Range(0, 3);
+                Instantiate(enemies[e], new Vector3(startX + (i-1)*moveX, startY + (i-1)*moveY, 0), new Quaternion());
                 enemyCount.AddEnemyNum(1);
             }
         }
-        
-        
+    }
+
+    public void SpawnWeapon(float posX, float posY, float x, float y)
+    {
+        int w = Random.Range(0, 3);
+        Instantiate(weapons[w], new Vector3(posX, posY, 0), Quaternion.identity);
     }
 }

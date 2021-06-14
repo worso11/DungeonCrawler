@@ -9,16 +9,17 @@ public class ShotgunWeapon : MonoBehaviour, Weapon
 
     private Color color = new Color(1,0,1,1);
     private static float speed = 10f;
-    private static float damage = 30f;
+    private static float damage = 20f;
     private float fireRate = 1f;
     private float nextFire = 0.0f;
-    
-    public void Start()
+
+    public void PrepareWeapon(int lvl)
     {
         bullet.GetComponent<Shooting>().setSpeed(speed);
         bullet.GetComponent<SpriteRenderer>().color = color;
         bullet.transform.GetChild(0).GetComponent<Light2D>().color = color;
         GameObject.Find("Weapon").transform.GetChild(0).GetComponent<Light2D>().color = color;
+        damage = 20f + (10f * lvl);
     }
     
     public void Shoot(Transform shootingPoint)
@@ -43,5 +44,14 @@ public class ShotgunWeapon : MonoBehaviour, Weapon
     public float getFireRate()
     {
         return fireRate;
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>().GetWeapon(1);
+            Destroy(gameObject);
+        }
     }
 }

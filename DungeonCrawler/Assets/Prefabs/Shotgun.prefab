@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5785016648842453608}
   - component: {fileID: 5785016648842453609}
   - component: {fileID: 5785016648842453606}
+  - component: {fileID: 5331390495775948141}
   m_Layer: 1
   m_Name: Shotgun
   m_TagString: Untagged
@@ -97,6 +98,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 8224523355608904344, guid: 09fba961d53d04b47b4b4ede37b4c0b5, type: 3}
+--- !u!61 &5331390495775948141
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5785016648842453607}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 0.24666667}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.24666667}
+  m_EdgeRadius: 0
 --- !u!1 &5785016648943422098
 GameObject:
   m_ObjectHideFlags: 0
