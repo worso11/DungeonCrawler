@@ -34,6 +34,8 @@ public class Rooms : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            LevelNum.level = 0;
+            player.GetComponent<Movement>().ResetWeapon();
             SceneManager.MoveGameObjectToScene(player, SceneManager.GetActiveScene());
             SceneManager.MoveGameObjectToScene(camera, SceneManager.GetActiveScene());
             SceneManager.LoadScene("MainMenu");
@@ -54,13 +56,13 @@ public class Rooms : MonoBehaviour
         rooms = new Dictionary<Tuple<float, float>, Tuple<GameObject,int>>();
         player.transform.position = new Vector3(0.5f, -0.5f, 0f);
         camera.transform.position = new Vector3(0.5f, -0.5f, -10f);
-        player.GetComponent<Movement>().ResetWeapon();
         SceneManager.LoadScene("Game");
         Invoke(nameof(PrepareRooms), 2f);
     }
 
     public void GameOver()
     {
+        player.GetComponent<Movement>().ResetWeapon();
         SceneManager.MoveGameObjectToScene(player, SceneManager.GetActiveScene());
         SceneManager.MoveGameObjectToScene(camera, SceneManager.GetActiveScene());
         SceneManager.LoadScene("GameOver");
